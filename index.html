@@ -8,7 +8,29 @@
     <style>
         :root { --accent: #000; --text-dim: #999; --border: #efefef; --bg-gray: #f8f8f8; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: #fff; color: #000; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        body { background: #fff; color: #000; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; position: relative; }
+
+        /* --- Custom Ad Banner Style --- */
+        .custom-ad-bridge {
+            width: 100%; max-width: 420px; color: white; padding: 25px; margin: 20px 0; border-radius: 12px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.2s; text-align: left;
+        }
+        .custom-ad-bridge:hover { transform: scale(1.02); }
+        .ad-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; display: block; }
+        .ad-btn { background: #fbbf24; color: #000; padding: 8px 20px; border-radius: 5px; font-weight: bold; text-transform: uppercase; display: inline-block; margin-top: 10px; font-size: 12px; }
+
+        /* --- In-Page Push Ad Style --- */
+        #push-notification {
+            position: fixed; bottom: -150px; right: 20px; width: 300px; background: #fff; border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; padding: 12px; z-index: 10000;
+            transition: bottom 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); cursor: pointer; border-left: 5px solid #2563eb;
+        }
+        #push-notification.active { bottom: 20px; }
+        #push-notification img { width: 50px; height: 50px; border-radius: 8px; margin-right: 12px; }
+        .push-text { text-align: left; flex: 1; }
+        .push-text b { font-size: 14px; color: #222; display: block; }
+        .push-text p { font-size: 12px; color: #666; margin: 3px 0 0 0; }
+        .close-push { position: absolute; top: 5px; right: 8px; font-size: 18px; color: #aaa; cursor: pointer; font-weight: bold; }
 
         /* --- Global Header --- */
         header { padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 1000; height: 65px; }
@@ -19,9 +41,6 @@
         
         .header-btns { display: flex; gap: 10px; align-items: center; }
         .export-btn { background: #000; color: #fff; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 11px; cursor: pointer; display: none; letter-spacing: 0.5px; }
-
-        /* --- Ads Slots --- */
-        .ad-slot { width: 100%; max-width: 728px; background: #fafafa; border: 1px solid var(--border); margin: 15px auto; display: flex; align-items: center; justify-content: center; color: #bbb; font-size: 11px; height: 90px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- Landing Page --- */
         #landing-page { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px; background: #fff; width: 100%; }
@@ -67,10 +86,14 @@
 </head>
 <body>
 
-<script>
-    // Paste your push notification script here
-    console.log("Push Notification Script Loaded");
-</script>
+<div id="push-notification" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
+    <span class="close-push" onclick="event.stopPropagation(); document.getElementById('push-notification').classList.remove('active');">&times;</span>
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968313.png" alt="icon">
+    <div class="push-text">
+        <b>🚀 46+ Pro Tools Ready!</b>
+        <p>ALL PDF TOOLS, Calculators & More at EasyUseHub.</p>
+    </div>
+</div>
 
 <header>
     <div class="nav-left">
@@ -85,7 +108,11 @@
 </header>
 
 <div id="landing-page">
-    <div class="ad-slot">Advertisement Slot 1</div>
+    <div class="custom-ad-bridge" style="background: linear-gradient(135deg, #1e3a8a, #2563eb);" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
+        <span class="ad-title">🚀 Try 46+ Premium Free Web Tools!</span>
+        <p>All PDF TOOLS, 16+ Calculators, Image Resize & More - 100% Free</p>
+        <div class="ad-btn">Open EasyUseHub</div>
+    </div>
 
     <div class="hero-section">
         <h1>Ultimate Image Resizer</h1>
@@ -97,7 +124,11 @@
         <a href="https://easyusehub.com/pdf-tools" class="nav-card">📄 ALL PDF TOOLS</a>
     </div>
 
-    <div class="ad-slot">Advertisement Slot 2</div>
+    <div class="custom-ad-bridge" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="window.open('https://easyusehub.blogspot.com/p/image-compressor.html', '_blank')">
+        <span class="ad-title">⚡ High-Speed Image Compressor</span>
+        <p>Compress your images without losing quality at EasyUseHub</p>
+        <div class="ad-btn" style="background: #fff;">Try Now</div>
+    </div>
 
     <div class="main-upload" onclick="document.getElementById('fileInput').click()">
         <div style="background:#f0f0f0; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:15px;">
@@ -107,7 +138,11 @@
         <span style="font-size:11px; color:#aaa; margin-top:5px;">JPG, PNG, WEBP</span>
     </div>
 
-    <div class="ad-slot">Advertisement Slot 3</div>
+    <div class="custom-ad-bridge" style="background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="window.open('https://easyusehub.blogspot.com/p/ultimate-calculators-hub.html', '_blank')">
+        <span class="ad-title">🔢 Smart Financial & Health Calculators</span>
+        <p>Loan EMI, Age Calculator, and BMI Tracker at your fingertips.</p>
+        <div class="ad-btn" style="background: #000; color: #fff;">Open Calculators</div>
+    </div>
 </div>
 
 <div id="editor-page">
@@ -135,44 +170,37 @@
 <script>
     const aspects = [
         { name: 'Original', w: 'auto', h: 'auto', cat: 'All' },
-        // Instagram
         { name: 'Insta Profile', w: 1, h: 1, cat: 'Insta' },
         { name: 'Square Post', w: 1, h: 1, cat: 'Insta' },
         { name: 'Portrait Post', w: 4, h: 5, cat: 'Insta' },
         { name: 'Landscape Post', w: 1.91, h: 1, cat: 'Insta' },
         { name: 'Insta Story', w: 9, h: 16, cat: 'Insta' },
         { name: 'Reels Cover', w: 9, h: 16, cat: 'Insta' },
-        // Facebook
         { name: 'FB Profile', w: 1, h: 1, cat: 'FB' },
         { name: 'Cover Photo', w: 820, h: 312, cat: 'FB' },
         { name: 'FB Post', w: 1, h: 1, cat: 'FB' },
         { name: 'FB Portrait', w: 4, h: 5, cat: 'FB' },
         { name: 'FB Story', w: 9, h: 16, cat: 'FB' },
         { name: 'Event Cover', w: 1200, h: 628, cat: 'FB' },
-        // YouTube
         { name: 'Thumbnail', w: 16, h: 9, cat: 'YT' },
         { name: 'Channel Cover', w: 2560, h: 1440, cat: 'YT' },
         { name: 'YT Shorts', w: 9, h: 16, cat: 'YT' },
         { name: 'YT Banner', w: 16, h: 2.5, cat: 'YT' },
         { name: 'YT Profile', w: 1, h: 1, cat: 'YT' },
-        // TikTok & Snapchat & X
         { name: 'TikTok Video', w: 9, h: 16, cat: 'Social' },
         { name: 'Snap Story', w: 9, h: 16, cat: 'Social' },
         { name: 'X Post', w: 16, h: 9, cat: 'Social' },
         { name: 'X Cover', w: 3, h: 1, cat: 'Social' },
         { name: 'LinkedIn Post', w: 1.91, h: 1, cat: 'Social' },
-        // Gaming
         { name: 'Twitch Banner', w: 16, h: 4.8, cat: 'Game' },
         { name: 'Twitch Video', w: 16, h: 9, cat: 'Game' },
         { name: 'Roblox Icon', w: 1, h: 1, cat: 'Game' },
         { name: 'Roblox Thumb', w: 16, h: 9, cat: 'Game' },
         { name: 'Discord Icon', w: 1, h: 1, cat: 'Game' },
-        // Market
         { name: 'Shopify Prod', w: 1, h: 1, cat: 'Market' },
         { name: 'eBay Product', w: 1, h: 1, cat: 'Market' },
         { name: 'Yelp Photo', w: 4, h: 3, cat: 'Market' },
         { name: 'Zillow Home', w: 4, h: 3, cat: 'Market' },
-        // Other
         { name: 'Pin Image', w: 2, h: 3, cat: 'Other' },
         { name: 'A4 Paper', w: 1, h: 1.41, cat: 'Other' },
         { name: 'Tumblr Post', w: 4, h: 5, cat: 'Other' },
@@ -216,6 +244,11 @@
                 document.getElementById('exportBtn').style.display = 'block';
                 setSize('auto', 'auto', null, 'Original');
                 renderAspects('All');
+
+                // ১ সেকেন্ড পরে পুশ অ্যাড দেখানো
+                setTimeout(() => {
+                    document.getElementById('push-notification').classList.add('active');
+                }, 1000);
             };
         };
         reader.readAsDataURL(file);
@@ -227,6 +260,7 @@
         document.getElementById('backBtn').style.display = 'none';
         document.getElementById('exportBtn').style.display = 'none';
         document.getElementById('fileInput').value = '';
+        document.getElementById('push-notification').classList.remove('active');
     }
 
     function filterCat(cat, el) {
