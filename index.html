@@ -10,56 +10,45 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* --- Global Header --- */
         header { 
-            background: #fff; padding: 12px 20px; border-bottom: 1px solid #eee; 
+            background: #fff; padding: 10px 15px; border-bottom: 1px solid #eee; 
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
-        .logo { font-weight: 800; color: #000; font-size: 18px; text-decoration: none; }
-        .btn-dl { background: #000; color: #fff; padding: 10px 22px; border-radius: 30px; font-weight: 800; text-decoration: none; font-size: 13px; display: none; cursor: pointer; border: none; }
+        .header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; }
+        .btn-dl { background: #000; color: #fff; padding: 8px 18px; border-radius: 30px; font-weight: 800; font-size: 13px; display: none; cursor: pointer; border: none; }
 
-        .container { width: 92%; max-width: 600px; margin: 15px auto; overflow-y: auto; flex: 1; }
+        .container { width: 92%; max-width: 600px; margin: 10px auto; overflow-y: auto; flex: 1; }
 
         /* --- Landing Page --- */
-        #landing-page { display: block; padding-bottom: 100px; }
+        #landing-page { display: block; padding-bottom: 80px; }
         .upload-card { 
-            background: #f8fafc; border: 2.5px dashed #cbd5e1; padding: 60px 20px; 
-            border-radius: 30px; text-align: center; cursor: pointer; transition: 0.3s; margin: 20px 0;
+            background: #f8fafc; border: 2.5px dashed #cbd5e1; padding: 50px 20px; 
+            border-radius: 25px; text-align: center; cursor: pointer; transition: 0.3s; margin: 15px 0;
         }
-        .upload-card:hover { border-color: var(--primary); background: #f1f5f9; }
-
-        /* --- Premium Ads --- */
-        .ad-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 20px; margin-bottom: 15px; border-radius: 20px; cursor: pointer; position: relative; }
-        .ad-btn { background: #fbbf24; color: #000; padding: 8px 15px; border-radius: 12px; font-weight: 800; font-size: 11px; display: inline-block; margin-top: 10px; }
+        .ad-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 18px; margin-bottom: 12px; border-radius: 18px; cursor: pointer; position: relative; }
+        .ad-btn { background: #fbbf24; color: #000; padding: 6px 12px; border-radius: 10px; font-weight: 800; font-size: 10px; display: inline-block; margin-top: 8px; }
 
         /* --- Editor Page --- */
         #editor-page { display: none; flex: 1; flex-direction: column; background: #fafafa; position: relative; }
-        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 15px; overflow: hidden; }
         .img-wrap { 
-            position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            position: relative; box-shadow: 0 5px 25px rgba(0,0,0,0.08); 
             background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center;
+            max-width: 95%; max-height: 95%;
         }
         #imagePreview { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
 
-        .editor-controls { background: #fff; border-top: 1px solid #eee; padding-bottom: 120px; }
-        .aspect-list { display: flex; gap: 20px; padding: 20px; overflow-x: auto; scrollbar-width: none; }
-        .aspect-item { flex: 0 0 auto; text-align: center; cursor: pointer; }
-        .aspect-shape { border: 2px solid #e2e8f0; border-radius: 10px; margin-bottom: 8px; transition: 0.2s; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; }
+        .editor-controls { background: #fff; border-top: 1px solid #eee; padding: 10px 0 20px 0; }
+        .aspect-list { display: flex; gap: 15px; padding: 10px 15px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .aspect-list::-webkit-scrollbar { display: none; }
+        .aspect-item { flex: 0 0 auto; text-align: center; cursor: pointer; min-width: 65px; }
+        .aspect-shape { border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto; background: #fff; }
         .aspect-item.active .aspect-shape { border-color: var(--primary); background: rgba(37, 99, 235, 0.05); transform: scale(1.05); }
-        .aspect-item span { font-size: 11px; font-weight: 700; color: #64748b; }
+        .aspect-item span { font-size: 10px; font-weight: 700; color: #64748b; }
 
-        /* --- Push Notification --- */
-        #push-notification { 
-            position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 360px; 
-            background: #1e293b; border-radius: 20px; padding: 15px; z-index: 10000; border: 1.5px solid var(--accent); 
-            display: flex; align-items: center; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        #push-notification.active { bottom: 95px; }
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 20px; color: #94a3b8; cursor: pointer; font-weight: bold; }
-
-        /* --- Bottom Nav --- */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px; border-top: 1px solid #eee; display: flex; justify-content: center; gap: 12px; z-index: 1001; }
-        .nav-btn { text-decoration: none; padding: 12px 25px; border-radius: 30px; font-weight: 800; font-size: 13px; color: #fff; background: var(--primary); }
+        /* --- Bottom Nav (Landing only) --- */
+        #bottom-nav-landing { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px; border-top: 1px solid #eee; display: flex; justify-content: center; gap: 10px; z-index: 1001; }
+        .nav-btn { text-decoration: none; padding: 10px 20px; border-radius: 30px; font-weight: 800; font-size: 12px; color: #fff; background: var(--primary); }
         .pdf-btn { background: #10b981; }
 
         canvas, #fileInput { display: none; }
@@ -68,35 +57,37 @@
 <body>
 
 <header>
-    <a href="#" class="logo" onclick="location.reload()">EasyUseHub</a>
+    <div class="header-left" id="headerBrand" onclick="location.reload()">EasyUseHub</div>
+    <div class="header-left" id="backBtn" style="display: none;" onclick="location.reload()">
+        <span style="font-size: 22px;">←</span>
+    </div>
     <button id="downloadBtn" class="btn-dl" onclick="processDownload()">Download ↓</button>
 </header>
 
 <div id="landing-page">
     <div class="container">
-        <div style="text-align:center; margin: 20px 0;">
-            <h2 style="font-weight: 800;">Image Resizer</h2>
-            <p style="font-size: 14px; color: #64748b;">Fast, High-Quality & Privacy Focused</p>
+        <div style="text-align:center; margin: 15px 0;">
+            <h2 style="font-weight: 800; font-size: 20px;">Image Resizer</h2>
+            <p style="font-size: 13px; color: #64748b;">Fast & High-Quality Resizing</p>
         </div>
 
         <div class="upload-card" onclick="document.getElementById('fileInput').click()">
-            <img src="https://cdn-icons-png.flaticon.com/512/3344/3344310.png" width="50" style="margin-bottom: 15px; opacity: 0.7;">
-            <h3 style="font-size: 18px;">Tap to Choose Photo</h3>
+            <img src="https://cdn-icons-png.flaticon.com/512/3344/3344310.png" width="40" style="margin-bottom: 10px; opacity: 0.7;">
+            <h3 style="font-size: 16px;">Choose Photo</h3>
         </div>
 
         <div class="ad-card" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
-            <b style="font-size: 16px;">💎 46+ Pro Tools Bundle</b>
-            <p style="font-size: 12px; opacity: 0.8; margin-top: 5px;">PDF, SEO and AI tools for creators.</p>
+            <b style="font-size: 14px;">💎 46+ Pro Tools Bundle</b>
             <div class="ad-btn">Explore Hub</div>
         </div>
         <div class="ad-card" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="window.open('https://easyusehub.blogspot.com/p/image-compressor.html', '_blank')">
-            <b>⚡ Image Compressor</b>
-            <div class="ad-btn" style="background: #fff;">Try Free</div>
+            <b style="font-size: 14px;">⚡ Image Compressor</b>
         </div>
-        <div class="ad-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="window.open('https://easyusehub.blogspot.com/p/ultimate-calculators-hub.html', '_blank')">
-            <b>🔢 Smart Calculators</b>
-            <div class="ad-btn" style="background: #000; color: #fff;">View Tools</div>
-        </div>
+    </div>
+    
+    <div id="bottom-nav-landing">
+        <a href="https://easyusehub.blogspot.com" class="nav-btn">🏠 Home</a>
+        <a href="https://easyusehub.blogspot.com/p/free-pdf-tools-online.html" class="nav-btn pdf-btn">📄 All PDF Tools</a>
     </div>
 </div>
 
@@ -109,45 +100,31 @@
     <div class="editor-controls">
         <div class="aspect-list">
             <div class="aspect-item active" onclick="setAspect('auto', 'auto', this, 'Original')">
-                <div class="aspect-shape" style="width: 50px; height: 50px; border-style: dashed;"></div>
+                <div class="aspect-shape" style="width: 40px; height: 40px; border-style: dashed;"></div>
                 <span>Original</span>
             </div>
             <div class="aspect-item" onclick="setAspect(9, 16, this, 'Story')">
-                <div class="aspect-shape" style="width: 35px; height: 62px;"></div>
+                <div class="aspect-shape" style="width: 28px; height: 50px;"></div>
                 <span>Story</span>
             </div>
             <div class="aspect-item" onclick="setAspect(1, 1, this, 'Square')">
-                <div class="aspect-shape" style="width: 50px; height: 50px;"></div>
+                <div class="aspect-shape" style="width: 40px; height: 40px;"></div>
                 <span>Square</span>
             </div>
             <div class="aspect-item" onclick="setAspect(9, 16, this, 'Reels')">
-                <div class="aspect-shape" style="width: 35px; height: 62px; background: #eee;"></div>
+                <div class="aspect-shape" style="width: 28px; height: 50px; background: #f0f0f0;"></div>
                 <span>Reels</span>
             </div>
             <div class="aspect-item" onclick="setAspect(4, 5, this, 'Portrait')">
-                <div class="aspect-shape" style="width: 45px; height: 56px;"></div>
+                <div class="aspect-shape" style="width: 36px; height: 45px;"></div>
                 <span>Portrait</span>
             </div>
             <div class="aspect-item" onclick="setAspect(16, 9, this, 'YouTube')">
-                <div class="aspect-shape" style="width: 62px; height: 35px;"></div>
+                <div class="aspect-shape" style="width: 50px; height: 28px;"></div>
                 <span>YouTube</span>
             </div>
         </div>
     </div>
-</div>
-
-<div id="push-notification" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
-    <span class="close-btn" onclick="event.stopPropagation(); this.parentElement.classList.remove('active');">&times;</span>
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968313.png" width="40">
-    <div style="text-align: left; margin-left: 15px; color: #fff;">
-        <b style="color: var(--accent); font-size: 13px;">🚀 Pro Tools Available</b>
-        <p style="font-size: 10px; opacity: 0.8;">Check out 46+ free web utilities.</p>
-    </div>
-</div>
-
-<div class="bottom-nav">
-    <a href="https://easyusehub.blogspot.com" class="nav-btn">🏠 Home</a>
-    <a href="https://easyusehub.blogspot.com/p/free-pdf-tools-online.html" class="nav-btn pdf-btn">📄 All PDF Tools</a>
 </div>
 
 <input type="file" id="fileInput" accept="image/*">
@@ -160,10 +137,11 @@
     const preview = document.getElementById('imagePreview');
     const imgWrap = document.getElementById('imgWrap');
     const dlBtn = document.getElementById('downloadBtn');
+    const backBtn = document.getElementById('backBtn');
+    const brand = document.getElementById('headerBrand');
     let originalImg = new Image();
     let currentMode = 'Original';
 
-    // ১. ফাইল আপলোড লজিক
     fileInput.onchange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -175,17 +153,14 @@
                     landing.style.display = "none";
                     editor.style.display = "flex";
                     dlBtn.style.display = "block";
-                    setAspect('auto', 'auto', document.querySelector('.aspect-item'), 'Original');
-                    
-                    // ২. পুশ অ্যাড প্রদর্শন
-                    setTimeout(() => document.getElementById('push-notification').classList.add('active'), 2000);
+                    backBtn.style.display = "flex";
+                    brand.style.display = "none";
                 };
             };
             reader.readAsDataURL(file);
         }
     };
 
-    // ৩. আসপেক্ট রেশিও সেট করা
     function setAspect(w, h, el, mode) {
         document.querySelectorAll('.aspect-item').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
@@ -201,51 +176,32 @@
         }
     }
 
-    // ৪. হাই-কোয়ালিটি ডাউনলোড লজিক
     function processDownload() {
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        
-        let tw = originalImg.width;
-        let th = originalImg.height;
+        let tw = originalImg.width, th = originalImg.height;
 
-        // প্রিসেট ডাইমেনশন (Instasize Standard)
         if(currentMode === "Story" || currentMode === "Reels") { tw = 1080; th = 1920; }
         else if(currentMode === "Square") { tw = 1080; th = 1080; }
         else if(currentMode === "YouTube") { tw = 1920; th = 1080; }
         else if(currentMode === "Portrait") { tw = 1080; th = 1350; }
 
-        canvas.width = tw;
-        canvas.height = th;
+        canvas.width = tw; canvas.height = th;
+        ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, tw, th);
 
-        // ব্যাকগ্রাউন্ড সাদা করা
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, tw, th);
-
-        // ইমেজ সেন্টার করা এবং রিসাইজ করা
         const imgRatio = originalImg.width / originalImg.height;
         const targetRatio = tw / th;
         let dw, dh, x, y;
 
-        if (imgRatio > targetRatio) {
-            dw = tw;
-            dh = tw / imgRatio;
-            x = 0;
-            y = (th - dh) / 2;
-        } else {
-            dh = th;
-            dw = th * imgRatio;
-            x = (tw - dw) / 2;
-            y = 0;
-        }
+        if (imgRatio > targetRatio) { dw = tw; dh = tw / imgRatio; x = 0; y = (th - dh) / 2; }
+        else { dh = th; dw = th * imgRatio; x = (tw - dw) / 2; y = 0; }
 
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(originalImg, x, y, dw, dh);
         
-        // ডাউনলোড ট্রিগার
         const link = document.createElement('a');
-        link.download = `EasyUseHub_${currentMode}_${tw}x${th}.png`;
+        link.download = `EasyUseHub_${currentMode}.png`;
         link.href = canvas.toDataURL("image/png", 1.0);
         link.click();
     }
