@@ -3,52 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Social Media Image Resizer – EasyUseHub</title>
+    <title>EasyUseHub – Pro Image Resizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #2563eb; --accent: #22d3ee; --bg: #ffffff; --text: #0f172a; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
+        /* --- Global Header --- */
         header { 
-            background: #fff; padding: 10px 15px; border-bottom: 1px solid #eee; 
+            background: #fff; padding: 12px 20px; border-bottom: 1px solid #eee; 
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
-        .header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; }
-        .btn-dl { background: #000; color: #fff; padding: 8px 18px; border-radius: 30px; font-weight: 800; font-size: 13px; display: none; cursor: pointer; border: none; }
+        .header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 800; font-size: 18px; }
+        .download-btn { background: #000; color: #fff; padding: 8px 22px; border-radius: 30px; font-weight: 800; font-size: 13px; border: none; cursor: pointer; transition: 0.2s; }
+        .download-btn:hover { background: #333; }
 
-        .container { width: 92%; max-width: 600px; margin: 10px auto; overflow-y: auto; flex: 1; }
+        /* --- Container Logic --- */
+        .container { width: 92%; max-width: 600px; margin: 0 auto; flex: 1; overflow-y: auto; padding: 20px 0 100px 0; }
 
-        /* --- Landing Page --- */
-        #landing-page { display: block; padding-bottom: 80px; }
-        .upload-card { 
-            background: #f8fafc; border: 2.5px dashed #cbd5e1; padding: 50px 20px; 
-            border-radius: 25px; text-align: center; cursor: pointer; transition: 0.3s; margin: 15px 0;
-        }
-        .ad-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 18px; margin-bottom: 12px; border-radius: 18px; cursor: pointer; position: relative; }
-        .ad-btn { background: #fbbf24; color: #000; padding: 6px 12px; border-radius: 10px; font-weight: 800; font-size: 10px; display: inline-block; margin-top: 8px; }
+        /* --- Landing UI --- */
+        .ad-top { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; }
+        .upload-card { background: #fff; border: 2.5px dashed var(--primary); padding: 60px 20px; border-radius: 25px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .upload-card:hover { background: #f0f7ff; }
+        .ad-detail { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 20px; margin-top: 15px; cursor: pointer; }
+        .ad-detail b { color: var(--primary); font-size: 16px; display: block; margin-bottom: 5px; }
 
-        /* --- Editor Page --- */
-        #editor-page { display: none; flex: 1; flex-direction: column; background: #fafafa; position: relative; }
-        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 15px; overflow: hidden; }
+        /* --- Editor UI --- */
+        #editor-page { display: none; flex: 1; flex-direction: column; background: #fafafa; overflow: hidden; }
+        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden; }
         .img-wrap { 
-            position: relative; box-shadow: 0 5px 25px rgba(0,0,0,0.08); 
-            background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center;
-            max-width: 95%; max-height: 95%;
+            position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.1); background: #fff; 
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            max-width: 100%; max-height: 100%; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         #imagePreview { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
 
-        .editor-controls { background: #fff; border-top: 1px solid #eee; padding: 10px 0 20px 0; }
-        .aspect-list { display: flex; gap: 15px; padding: 10px 15px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-        .aspect-list::-webkit-scrollbar { display: none; }
+        .editor-controls { background: #fff; border-top: 1px solid #eee; padding: 15px 0 40px 0; }
+        .category-scroll { display: flex; gap: 10px; padding: 0 20px 15px 20px; overflow-x: auto; scrollbar-width: none; }
+        .cat-tab { padding: 8px 18px; background: #f1f5f9; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; color: #64748b; cursor: pointer; }
+        .cat-tab.active { background: #000; color: #fff; }
+
+        .aspect-list { display: flex; gap: 15px; padding: 5px 20px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .aspect-item { flex: 0 0 auto; text-align: center; cursor: pointer; min-width: 65px; }
-        .aspect-shape { border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto; background: #fff; }
+        .aspect-shape { border: 2.5px solid #e2e8f0; border-radius: 12px; margin: 0 auto 8px auto; background: #fff; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
         .aspect-item.active .aspect-shape { border-color: var(--primary); background: rgba(37, 99, 235, 0.05); transform: scale(1.05); }
         .aspect-item span { font-size: 10px; font-weight: 700; color: #64748b; }
 
-        /* --- Bottom Nav (Landing only) --- */
-        #bottom-nav-landing { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px; border-top: 1px solid #eee; display: flex; justify-content: center; gap: 10px; z-index: 1001; }
-        .nav-btn { text-decoration: none; padding: 10px 20px; border-radius: 30px; font-weight: 800; font-size: 12px; color: #fff; background: var(--primary); }
+        /* --- Desktop Specific Tweaks --- */
+        @media (min-width: 1024px) {
+            .aspect-list { justify-content: center; }
+            .category-scroll { justify-content: center; }
+        }
+
+        /* --- Bottom Nav (Always Fixed) --- */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px; border-top: 1px solid #eee; display: flex; justify-content: center; gap: 12px; z-index: 1001; }
+        .nav-btn { text-decoration: none; padding: 10px 25px; border-radius: 30px; font-weight: 800; font-size: 12px; color: #fff; background: var(--primary); }
         .pdf-btn { background: #10b981; }
 
         canvas, #fileInput { display: none; }
@@ -57,37 +67,35 @@
 <body>
 
 <header>
-    <div class="header-left" id="headerBrand" onclick="location.reload()">EasyUseHub</div>
-    <div class="header-left" id="backBtn" style="display: none;" onclick="location.reload()">
-        <span style="font-size: 22px;">←</span>
-    </div>
-    <button id="downloadBtn" class="btn-dl" onclick="processDownload()">Download ↓</button>
+    <div id="headerBrand" class="header-left" onclick="location.reload()">EasyUseHub</div>
+    <div id="backBtn" class="header-left" style="display: none;" onclick="location.reload()">← Back</div>
+    <button id="downloadBtn" class="download-btn" style="display: none;" onclick="processDownload()">Download ↓</button>
 </header>
 
 <div id="landing-page">
     <div class="container">
-        <div style="text-align:center; margin: 15px 0;">
-            <h2 style="font-weight: 800; font-size: 20px;">Image Resizer</h2>
-            <p style="font-size: 13px; color: #64748b;">Fast & High-Quality Resizing</p>
+        <div class="ad-top">📢 <b>Premium Ad Space</b><br><span style="font-size: 11px; color:#94a3b8;">High performance web utilities</span></div>
+        
+        <div style="text-align:center; margin-bottom: 20px;">
+            <h2 style="font-size: 24px; font-weight: 800;">Image Resizer</h2>
+            <p style="font-size: 13px; color: #64748b;">Social Media Ready in Seconds</p>
         </div>
 
         <div class="upload-card" onclick="document.getElementById('fileInput').click()">
-            <img src="https://cdn-icons-png.flaticon.com/512/3344/3344310.png" width="40" style="margin-bottom: 10px; opacity: 0.7;">
-            <h3 style="font-size: 16px;">Choose Photo</h3>
+            <img src="https://cdn-icons-png.flaticon.com/512/3344/3344310.png" width="50" style="margin-bottom: 10px;">
+            <h3 style="font-size: 18px;">Choose Photo</h3>
+            <p style="font-size: 11px; color: #94a3b8; margin-top: 5px;">Supports up to 25MB (HD)</p>
         </div>
 
-        <div class="ad-card" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
-            <b style="font-size: 14px;">💎 46+ Pro Tools Bundle</b>
-            <div class="ad-btn">Explore Hub</div>
+        <div class="ad-detail" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
+            <b>💎 Ultimate 46+ Tools Bundle</b>
+            <p style="font-size: 12px; color: #64748b;">PDF Editor, Image Tools, and Finance Calculators for free.</p>
         </div>
-        <div class="ad-card" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="window.open('https://easyusehub.blogspot.com/p/image-compressor.html', '_blank')">
-            <b style="font-size: 14px;">⚡ Image Compressor</b>
+        
+        <div class="ad-detail" style="border-left: 4px solid #10b981;" onclick="window.open('https://easyusehub.blogspot.com/p/image-compressor.html', '_blank')">
+            <b style="color: #059669;">⚡ Instant Image Compressor</b>
+            <p style="font-size: 12px; color: #64748b;">Compress images without losing quality in one click.</p>
         </div>
-    </div>
-    
-    <div id="bottom-nav-landing">
-        <a href="https://easyusehub.blogspot.com" class="nav-btn">🏠 Home</a>
-        <a href="https://easyusehub.blogspot.com/p/free-pdf-tools-online.html" class="nav-btn pdf-btn">📄 All PDF Tools</a>
     </div>
 </div>
 
@@ -98,33 +106,45 @@
         </div>
     </div>
     <div class="editor-controls">
+        <div class="category-scroll">
+            <div class="cat-tab active">All</div>
+            <div class="cat-tab">Instagram</div>
+            <div class="cat-tab">Facebook</div>
+            <div class="cat-tab">YouTube</div>
+            <div class="cat-tab">Pinterest</div>
+        </div>
         <div class="aspect-list">
             <div class="aspect-item active" onclick="setAspect('auto', 'auto', this, 'Original')">
-                <div class="aspect-shape" style="width: 40px; height: 40px; border-style: dashed;"></div>
+                <div class="aspect-shape" style="width: 45px; height: 45px; border-style: dashed;"></div>
                 <span>Original</span>
             </div>
             <div class="aspect-item" onclick="setAspect(9, 16, this, 'Story')">
-                <div class="aspect-shape" style="width: 28px; height: 50px;"></div>
+                <div class="aspect-shape" style="width: 32px; height: 56px;"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="16"></div>
                 <span>Story</span>
             </div>
             <div class="aspect-item" onclick="setAspect(1, 1, this, 'Square')">
-                <div class="aspect-shape" style="width: 40px; height: 40px;"></div>
+                <div class="aspect-shape" style="width: 45px; height: 45px;"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="16"></div>
                 <span>Square</span>
             </div>
-            <div class="aspect-item" onclick="setAspect(9, 16, this, 'Reels')">
-                <div class="aspect-shape" style="width: 28px; height: 50px; background: #f0f0f0;"></div>
-                <span>Reels</span>
-            </div>
             <div class="aspect-item" onclick="setAspect(4, 5, this, 'Portrait')">
-                <div class="aspect-shape" style="width: 36px; height: 45px;"></div>
+                <div class="aspect-shape" style="width: 40px; height: 50px;"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="16"></div>
                 <span>Portrait</span>
             </div>
             <div class="aspect-item" onclick="setAspect(16, 9, this, 'YouTube')">
-                <div class="aspect-shape" style="width: 50px; height: 28px;"></div>
+                <div class="aspect-shape" style="width: 56px; height: 32px;"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="16"></div>
                 <span>YouTube</span>
+            </div>
+            <div class="aspect-item" onclick="setAspect(1.91, 1, this, 'FB Post')">
+                <div class="aspect-shape" style="width: 54px; height: 28px;"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="16"></div>
+                <span>FB Post</span>
             </div>
         </div>
     </div>
+</div>
+
+<div class="bottom-nav">
+    <a href="https://easyusehub.blogspot.com" class="nav-btn">🏠 Home</a>
+    <a href="https://easyusehub.blogspot.com/p/free-pdf-tools-online.html" class="nav-btn pdf-btn">📄 All PDF Tools</a>
 </div>
 
 <input type="file" id="fileInput" accept="image/*">
@@ -144,28 +164,32 @@
 
     fileInput.onchange = (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                originalImg.src = event.target.result;
-                originalImg.onload = () => {
-                    preview.src = originalImg.src;
-                    landing.style.display = "none";
-                    editor.style.display = "flex";
-                    dlBtn.style.display = "block";
-                    backBtn.style.display = "flex";
-                    brand.style.display = "none";
-                };
-            };
-            reader.readAsDataURL(file);
+        if (!file) return;
+
+        if (file.size > 25 * 1024 * 1024) {
+            alert("File too large! Max 25MB supported for stability.");
+            return;
         }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            originalImg.src = event.target.result;
+            originalImg.onload = () => {
+                preview.src = originalImg.src;
+                landing.style.display = "none";
+                editor.style.display = "flex";
+                dlBtn.style.display = "block";
+                backBtn.style.display = "block";
+                brand.style.display = "none";
+            };
+        };
+        reader.readAsDataURL(file);
     };
 
     function setAspect(w, h, el, mode) {
         document.querySelectorAll('.aspect-item').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
         currentMode = mode;
-
         if(w === 'auto') {
             imgWrap.style.aspectRatio = "auto";
             imgWrap.style.width = "auto";
@@ -181,13 +205,15 @@
         const ctx = canvas.getContext('2d');
         let tw = originalImg.width, th = originalImg.height;
 
-        if(currentMode === "Story" || currentMode === "Reels") { tw = 1080; th = 1920; }
+        if(currentMode === "Story") { tw = 1080; th = 1920; }
         else if(currentMode === "Square") { tw = 1080; th = 1080; }
         else if(currentMode === "YouTube") { tw = 1920; th = 1080; }
         else if(currentMode === "Portrait") { tw = 1080; th = 1350; }
+        else if(currentMode === "FB Post") { tw = 1200; th = 630; }
 
         canvas.width = tw; canvas.height = th;
-        ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, tw, th);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, tw, th);
 
         const imgRatio = originalImg.width / originalImg.height;
         const targetRatio = tw / th;
