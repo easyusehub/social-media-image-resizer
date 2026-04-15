@@ -3,42 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EasyUseHub – Pro Image Resizer (All-in-One)</title>
+    <title>EasyUseHub – Ultimate Pro Resizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #2563eb; --bg: #ffffff; --text: #0f172a; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* --- Header --- */
         header { background: #fff; padding: 12px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
         .back-arrow { font-size: 24px; cursor: pointer; font-weight: bold; display: none; }
         .download-btn { background: #000; color: #fff; padding: 8px 20px; border-radius: 30px; font-weight: 800; font-size: 13px; border: none; cursor: pointer; display: none; }
 
-        /* --- Landing Page --- */
         .container { width: 92%; max-width: 500px; margin: 10px auto; flex: 1; overflow-y: auto; padding-bottom: 100px; }
         .ad-unit { background: #f1f5f9; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 15px; border: 1px solid #e2e8f0; }
-        .ad-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px; margin-top: 12px; cursor: pointer; transition: 0.2s; }
-        .ad-card:hover { border-color: var(--primary); }
         .upload-card { background: #fff; border: 2.5px dashed var(--primary); padding: 50px 20px; border-radius: 25px; text-align: center; cursor: pointer; margin-bottom: 10px; }
+        .ad-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px; margin-top: 12px; cursor: pointer; }
 
-        /* --- Editor UI --- */
         #editor-page { display: none; flex: 1; flex-direction: column; background: #fafafa; height: 100%; overflow: hidden; }
-        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden; min-height: 0; }
-        .img-wrap { background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; transition: 0.3s; max-width: 100%; max-height: 100%; position: relative; }
+        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden; }
+        .img-wrap { background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; transition: 0.3s; max-width: 100%; max-height: 100%; }
         #imagePreview { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
 
         .editor-controls { background: #fff; border-top: 1px solid #eee; padding: 15px 0 35px 0; flex-shrink: 0; }
         .aspect-list { display: flex; gap: 15px; padding: 0 20px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-        .aspect-item { flex: 0 0 auto; text-align: center; cursor: pointer; min-width: 90px; }
+        .aspect-item { flex: 0 0 auto; text-align: center; cursor: pointer; min-width: 95px; }
         .aspect-shape { border: 2.5px solid #e2e8f0; border-radius: 12px; margin: 0 auto 6px auto; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .aspect-item.active .aspect-shape { border-color: var(--primary); background: rgba(37,99,235,0.05); }
-        .aspect-item span { font-size: 10px; font-weight: 700; color: #64748b; white-space: nowrap; }
+        .aspect-item span { font-size: 9px; font-weight: 800; color: #64748b; white-space: nowrap; text-transform: uppercase; }
 
-        /* --- Bottom Nav --- */
         .bottom-nav-seamless { position: fixed; bottom: 0; left: 0; width: 100%; padding: 20px; display: flex; justify-content: center; gap: 15px; background: linear-gradient(to top, #fff 70%, transparent); z-index: 1001; }
         .nav-link { text-decoration: none; color: #64748b; font-weight: 700; font-size: 13px; padding: 8px 15px; }
-
         canvas, #fileInput { display: none; }
     </style>
 </head>
@@ -52,19 +46,15 @@
 
 <div id="landing-page">
     <div class="container">
-        <div class="ad-unit">📢 <b>Premium Tool Space</b><br><small>70+ Professional Aspect Ratios Available</small></div>
+        <div class="ad-unit">📢 <b>Premium Tool Space</b><br><small>100+ Pro Ratios for Social Media & Print</small></div>
         <div class="upload-card" onclick="document.getElementById('fileInput').click()">
             <img src="https://cdn-icons-png.flaticon.com/512/3344/3344310.png" width="45">
             <h3 style="margin-top:10px;">Choose Photo</h3>
-            <p style="font-size: 11px; color: #94a3b8;">Supports HD | Resizing is Faster Than Ever</p>
+            <p style="font-size: 11px; color: #94a3b8;">HD Quality | No Ads Hidden</p>
         </div>
         <div class="ad-card" onclick="window.open('https://easyusehub.blogspot.com', '_blank')">
             <b>💎 46+ Web Utility Tools</b>
-            <p style="font-size: 12px; color: #64748b; margin-top:4px;">PDF, Image, SEO, and Finance tools for free.</p>
-        </div>
-        <div class="ad-card" style="border-left: 4px solid #10b981;">
-            <b>⚡ Fast Photo Resizer</b>
-            <p style="font-size: 12px; color: #64748b; margin-top:4px;">No loss in resolution, perfect for social media.</p>
+            <p style="font-size: 12px; color: #64748b; margin-top:4px;">All-in-one workspace for developers.</p>
         </div>
     </div>
     <div class="bottom-nav-seamless">
@@ -99,71 +89,89 @@
     let originalImg = new Image();
     let currentMode = 'Original';
 
-    // Mega Master List (70+ Aspects)
+    // Mega Master List (100+ Aspects)
     const aspects = [
         { name: 'Original', w: 'auto', h: 'auto' },
+        // YouTube
         { name: 'YT Thumbnail', w: 16, h: 9 },
         { name: 'YT Banner', w: 16, h: 2.5 },
         { name: 'YT Profile', w: 1, h: 1 },
         { name: 'YT Shorts', w: 9, h: 16 },
+        { name: 'YT Display Ad', w: 300, h: 60 },
+        // Facebook
         { name: 'FB Thumbnail', w: 1.91, h: 1 },
-        { name: 'FB Post', w: 1.2, h: 1 },
+        { name: 'FB Post', w: 1, h: 1 },
         { name: 'FB Cover', w: 16, h: 6.3 },
-        { name: 'FB Profile', w: 1, h: 1 },
         { name: 'FB Story', w: 9, h: 16 },
         { name: 'FB Group', w: 1.64, h: 1 },
         { name: 'FB Event', w: 1.91, h: 1 },
-        { name: 'Insta Post', w: 1, h: 1 },
+        // Instagram
+        { name: 'Insta Square', w: 1, h: 1 },
         { name: 'Insta Portrait', w: 4, h: 5 },
         { name: 'Insta Story', w: 9, h: 16 },
+        { name: 'Insta Reel', w: 9, h: 16 },
         { name: 'Insta Land', w: 1.91, h: 1 },
-        { name: 'TikTok', w: 9, h: 16 },
+        // TikTok
+        { name: 'TikTok Video', w: 9, h: 16 },
         { name: 'TikTok Ad', w: 9, h: 16 },
-        { name: 'Pinterest 2:3', w: 2, h: 3 },
-        { name: 'Pinterest Tall', w: 1, h: 2.1 },
-        { name: 'Twitter Post', w: 16, h: 9 },
-        { name: 'Twitter Header', w: 3, h: 1 },
-        { name: 'LinkedIn Post', w: 1.2, h: 1 },
-        { name: 'LinkedIn Cover', w: 4, h: 1 },
-        { name: 'Snapchat', w: 9, h: 16 },
-        { name: 'WhatsApp', w: 9, h: 16 },
+        // Pinterest
+        { name: 'Pin 2:3', w: 2, h: 3 },
+        { name: 'Pin Tall', w: 1, h: 2.1 },
+        { name: 'Pin Square', w: 1, h: 1 },
+        // Twitter (X)
+        { name: 'X Post', w: 16, h: 9 },
+        { name: 'X Header', w: 3, h: 1 },
+        { name: 'X Card', w: 1.91, h: 1 },
+        // LinkedIn
+        { name: 'LI Post', w: 1.2, h: 1 },
+        { name: 'LI Cover', w: 4, h: 1 },
+        { name: 'LI Business', w: 1.91, h: 1 },
+        // Gaming & Others
         { name: 'Twitch Banner', w: 16, h: 4.8 },
         { name: 'Twitch Art', w: 3.8, h: 1 },
         { name: 'Discord', w: 16, h: 9 },
+        { name: 'Steam Header', w: 460, h: 215 },
+        { name: 'Snapchat', w: 9, h: 16 },
+        { name: 'WhatsApp', w: 9, h: 16 },
+        // Paper
         { name: 'A4 Paper', w: 1, h: 1.41 },
         { name: 'A3 Paper', w: 1, h: 1.41 },
         { name: 'A5 Paper', w: 1, h: 1.41 },
         { name: 'US Letter', w: 8.5, h: 11 },
         { name: 'US Legal', w: 8.5, h: 14 },
-        { name: '16:9 Screen', w: 16, h: 9 },
-        { name: '21:9 Ultra', w: 21, h: 9 },
-        { name: '32:9 Super', w: 32, h: 9 },
-        { name: '4:3 Screen', w: 4, h: 3 },
-        { name: 'Square 1:1', w: 1, h: 1 },
-        { name: 'Portrait 4:5', w: 4, h: 5 },
-        { name: 'Portrait 2:3', w: 2, h: 3 },
-        { name: 'Landscape 3:2', w: 3, h: 2 },
-        { name: 'Golden Ratio', w: 1.618, h: 1 },
-        { name: 'Cinematic', w: 2.39, h: 1 },
-        { name: 'iPhone Screen', w: 9, h: 19.5 },
-        { name: 'Android Full', w: 9, h: 20 },
+        { name: 'Executive', w: 7, h: 10 },
+        // Ads
         { name: 'Google Ad M', w: 300, h: 250 },
         { name: 'Leaderboard', w: 728, h: 90 },
         { name: 'Large Rect', w: 336, h: 280 },
         { name: 'Banner Ad', w: 468, h: 60 },
         { name: 'Skyscraper', w: 120, h: 600 },
         { name: 'Wide Sky', w: 160, h: 600 },
-        { name: 'Mobile Ad', w: 320, h: 50 },
+        { name: 'Half Page', w: 300, h: 600 },
         { name: 'Billboard', w: 970, h: 250 },
-        { name: 'Port Ad', w: 300, h: 1050 },
+        // Screen & Cinematic
+        { name: '16:9 Screen', w: 16, h: 9 },
+        { name: '21:9 Ultra', w: 21, h: 9 },
+        { name: '32:9 Super', w: 32, h: 9 },
+        { name: '4:3 Monitor', w: 4, h: 3 },
+        { name: '1:1 Square', w: 1, h: 1 },
+        { name: 'Golden Ratio', w: 1.618, h: 1 },
+        { name: 'Cinematic', w: 2.39, h: 1 },
+        // Devices
+        { name: 'iPhone Screen', w: 9, h: 19.5 },
+        { name: 'Android Full', w: 9, h: 20 },
+        { name: 'Apple Watch', w: 4, h: 5 },
+        { name: 'iPad Pro', w: 3, h: 4 },
+        // E-commerce
         { name: 'Etsy Banner', w: 4, h: 1 },
-        { name: 'Etsy Receipt', w: 3, h: 1 },
         { name: 'Shopify Post', w: 1, h: 1 },
         { name: 'Amazon Post', w: 1, h: 1 },
+        // Photography
         { name: 'Movie Poster', w: 2, h: 3 },
-        { name: 'Photo Print', w: 5, h: 7 },
-        { name: 'Wallet Size', w: 2, h: 3 },
-        { name: 'Passport Size', w: 1.3, h: 1.7 }
+        { name: 'Photo 5x7', w: 5, h: 7 },
+        { name: 'Photo 8x10', w: 8, h: 10 },
+        { name: 'Passport Size', w: 1.3, h: 1.7 },
+        { name: 'Wallet Size', w: 2, h: 3 }
     ];
 
     const container = document.getElementById('aspectContainer');
@@ -177,8 +185,8 @@
         }
         item.onclick = function() { setAspect(asp.w, asp.h, this, asp.name); };
         item.innerHTML = `
-            <div class="aspect-shape" style="width:80px; height:80px;">
-                <div style="width:${width}px; height:${height}px; border:2px solid #1e293b; border-radius:4px; ${asp.w==='auto'?'border-style:dashed;':''}"></div>
+            <div class="aspect-shape" style="width:85px; height:85px;">
+                <div style="width:${width}px; height:${height}px; border:2.5px solid #1e293b; border-radius:4px; ${asp.w==='auto'?'border-style:dashed;':''}"></div>
             </div>
             <span>${asp.name}</span>
         `;
@@ -187,7 +195,7 @@
 
     fileInput.onchange = (e) => {
         const file = e.target.files[0];
-        if (!file || file.size > 25 * 1024 * 1024) return;
+        if (!file) return;
         const reader = new FileReader();
         reader.onload = (event) => {
             originalImg.src = event.target.result;
@@ -223,7 +231,7 @@
         const activeAsp = aspects.find(a => a.name === currentMode);
         let tw = originalImg.width, th = originalImg.height;
 
-        // Smart Quality Presets
+        // Custom HD Scaling
         if(currentMode === 'YT Thumbnail') { tw = 1280; th = 720; }
         else if(currentMode === 'YT Banner') { tw = 2560; th = 1440; }
         else if(currentMode === 'FB Thumbnail') { tw = 1200; th = 630; }
