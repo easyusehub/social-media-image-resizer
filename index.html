@@ -3,65 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EasyUseHub – Pro Image Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>EasyUseHub – Ultimate Image Resizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #000; --text-dim: #999; --border: #eeeeee; }
+        :root { --accent: #000; --text-dim: #999; --border: #efefef; --bg-gray: #f8f8f8; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: #fff; color: #000; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        body { background: #fff; color: #000; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-        /* Header */
-        header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 0.5px solid var(--border); }
-        #brand { font-weight: 800; font-size: 19px; letter-spacing: -0.8px; }
-        .header-btns { display: flex; gap: 12px; }
-        .btn-ui { border: none; padding: 7px 15px; border-radius: 6px; font-weight: 700; font-size: 11px; cursor: pointer; }
-        .new-btn { background: #f5f5f5; color: #000; display: none; }
-        .export-btn { background: #000; color: #fff; display: none; }
+        /* --- Global Header --- */
+        header { padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 1000; height: 65px; }
+        .nav-left { display: flex; align-items: center; gap: 15px; }
+        #backBtn { cursor: pointer; display: none; padding: 5px; border-radius: 50%; transition: 0.2s; }
+        #backBtn:hover { background: #f0f0f0; }
+        #brand { font-weight: 900; font-size: 20px; letter-spacing: -1.2px; }
+        
+        .header-btns { display: flex; gap: 10px; align-items: center; }
+        .export-btn { background: #000; color: #fff; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 11px; cursor: pointer; display: none; letter-spacing: 0.5px; }
 
-        /* Workspace */
-        #landing-page { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        .upload-trigger { width: 100%; max-width: 340px; height: 200px; border: 1.5px dashed #ddd; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
-        .upload-trigger:hover { border-color: #000; background: #fafafa; }
+        /* --- Ads Slots --- */
+        .ad-slot { width: 100%; max-width: 728px; background: #fafafa; border: 1px solid var(--border); margin: 15px auto; display: flex; align-items: center; justify-content: center; color: #bbb; font-size: 11px; height: 90px; text-transform: uppercase; letter-spacing: 1px; }
 
-        #editor-page { display: none; flex: 1; flex-direction: column; overflow: hidden; background: #fafafa; }
-        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; overflow: hidden; }
-        .img-wrap { display: flex; align-items: center; justify-content: center; max-width: 100%; max-height: 100%; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
-        #imagePreview { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
+        /* --- Landing Page --- */
+        #landing-page { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px; background: #fff; width: 100%; }
+        .hero-section { text-align: center; margin: 10px 0 30px; }
+        .hero-section h1 { font-size: 34px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 8px; line-height: 1.1; }
+        
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 420px; margin-bottom: 25px; }
+        .nav-card { background: var(--bg-gray); padding: 14px; border-radius: 14px; text-decoration: none; color: #000; font-weight: 800; font-size: 12px; text-align: center; border: 1px solid transparent; transition: 0.2s; }
+        .nav-card:hover { border-color: #000; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        /* Controls */
-        .controls { background: #fff; border-top: 0.5px solid var(--border); }
-        .cat-row { display: flex; gap: 20px; padding: 18px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 0.5px solid var(--border); }
+        .main-upload { width: 100%; max-width: 420px; height: 200px; border: 2.5px dashed #eee; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; background: #fff; margin: 10px 0; transition: 0.3s; }
+        .main-upload:hover { border-color: #000; background: #fafafa; transform: scale(1.01); }
+
+        /* --- Editor Page --- */
+        #editor-page { display: none; flex: 1; flex-direction: column; background: #f4f4f4; width: 100%; }
+        .workspace { flex: 1; display: flex; align-items: center; justify-content: center; padding: 25px; overflow: hidden; }
+        .img-wrap { display: flex; align-items: center; justify-content: center; max-width: 100%; max-height: 100%; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.1); transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1); border-radius: 4px; overflow: hidden; }
+        #imagePreview { max-width: 100%; max-height: 100%; display: block; }
+
+        /* --- Controls --- */
+        .controls { background: #fff; border-top: 1px solid var(--border); width: 100%; z-index: 100; }
+        .cat-row { display: flex; gap: 20px; padding: 15px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--border); }
         .cat-row::-webkit-scrollbar { display: none; }
-        .cat-item { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; cursor: pointer; white-space: nowrap; letter-spacing: 0.5px; }
-        .cat-item.active { color: #000; }
+        .cat-item { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; cursor: pointer; white-space: nowrap; letter-spacing: 0.8px; padding-bottom: 5px; }
+        .cat-item.active { color: #000; border-bottom: 2px solid #000; }
 
-        .aspect-row { display: flex; gap: 15px; padding: 15px 20px 35px 20px; overflow-x: auto; scrollbar-width: none; align-items: flex-end; }
+        .aspect-row { display: flex; gap: 15px; padding: 20px; overflow-x: auto; scrollbar-width: none; align-items: flex-end; }
         .aspect-row::-webkit-scrollbar { display: none; }
         .aspect-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; cursor: pointer; min-width: 85px; }
-        .shape-view { width: 52px; height: 52px; border: 1.5px solid #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; transition: 0.2s; }
-        .aspect-item.active .shape-view { border-color: #000; background: #f9f9f9; }
-        .inner-box { border: 1.5px solid #000; }
-        .aspect-item span { font-size: 9px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; text-align: center; width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .shape-view { width: 55px; height: 55px; border: 1px solid #e0e0e0; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; transition: 0.2s; }
+        .aspect-item.active .shape-view { border-color: #000; background: #fcfcfc; border-width: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .inner-box { border: 1.8px solid #000; }
+        .aspect-item span { font-size: 9px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; text-align: center; width: 85px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: 0.2px; }
         .aspect-item.active span { color: #000; }
 
         canvas, #fileInput { display: none; }
+
+        @media (max-width: 600px) {
+            .hero-section h1 { font-size: 28px; }
+            .nav-grid { max-width: 100%; }
+        }
     </style>
 </head>
 <body>
 
+<script>
+    // Paste your push notification script here
+    console.log("Push Notification Script Loaded");
+</script>
+
 <header>
-    <div id="brand">EasyUseHub</div>
+    <div class="nav-left">
+        <div id="backBtn" onclick="goToLanding()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </div>
+        <div id="brand" onclick="location.reload()">EasyUseHub</div>
+    </div>
     <div class="header-btns">
-        <button id="newBtn" class="btn-ui new-btn" onclick="document.getElementById('fileInput').click()">NEW</button>
-        <button id="exportBtn" class="btn-ui export-btn" onclick="processDownload()">EXPORT</button>
+        <button id="exportBtn" class="export-btn" onclick="processDownload()">DOWNLOAD</button>
     </div>
 </header>
 
 <div id="landing-page">
-    <div class="upload-trigger" onclick="document.getElementById('fileInput').click()">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
-        <span style="margin-top:10px; font-weight:700; font-size:13px;">Open Photo</span>
+    <div class="ad-slot">Advertisement Slot 1</div>
+
+    <div class="hero-section">
+        <h1>Ultimate Image Resizer</h1>
+        <p style="color:#888; font-size:14px; font-weight:500;">Resize for Insta, TikTok, YouTube & 50+ Others</p>
     </div>
+
+    <div class="nav-grid">
+        <a href="https://easyusehub.com" class="nav-card">🏠 HOME SITE</a>
+        <a href="https://easyusehub.com/pdf-tools" class="nav-card">📄 ALL PDF TOOLS</a>
+    </div>
+
+    <div class="ad-slot">Advertisement Slot 2</div>
+
+    <div class="main-upload" onclick="document.getElementById('fileInput').click()">
+        <div style="background:#f0f0f0; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:15px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <span style="font-weight:900; font-size:16px;">CHOOSE PHOTO</span>
+        <span style="font-size:11px; color:#aaa; margin-top:5px;">JPG, PNG, WEBP</span>
+    </div>
+
+    <div class="ad-slot">Advertisement Slot 3</div>
 </div>
 
 <div id="editor-page">
@@ -69,14 +115,14 @@
         <div class="img-wrap" id="imgWrap"><img id="imagePreview" src=""></div>
     </div>
     <div class="controls">
-        <div class="cat-row">
+        <div class="cat-row" id="catBar">
             <div class="cat-item active" onclick="filterCat('All', this)">All</div>
             <div class="cat-item" onclick="filterCat('Insta', this)">Instagram</div>
             <div class="cat-item" onclick="filterCat('FB', this)">Facebook</div>
             <div class="cat-item" onclick="filterCat('YT', this)">YouTube</div>
-            <div class="cat-item" onclick="filterCat('Game', this)">Gaming/Twitch</div>
-            <div class="cat-item" onclick="filterCat('Market', this)">E-Commerce</div>
-            <div class="cat-item" onclick="filterCat('Social', this)">X/TikTok/Snap</div>
+            <div class="cat-item" onclick="filterCat('Social', this)">Socials</div>
+            <div class="cat-item" onclick="filterCat('Game', this)">Gaming</div>
+            <div class="cat-item" onclick="filterCat('Market', this)">E-Com</div>
             <div class="cat-item" onclick="filterCat('Other', this)">More</div>
         </div>
         <div class="aspect-row" id="aspectBar"></div>
@@ -90,56 +136,47 @@
     const aspects = [
         { name: 'Original', w: 'auto', h: 'auto', cat: 'All' },
         // Instagram
-        { name: 'Profile Picture', w: 1, h: 1, cat: 'Insta' },
+        { name: 'Insta Profile', w: 1, h: 1, cat: 'Insta' },
         { name: 'Square Post', w: 1, h: 1, cat: 'Insta' },
         { name: 'Portrait Post', w: 4, h: 5, cat: 'Insta' },
         { name: 'Landscape Post', w: 1.91, h: 1, cat: 'Insta' },
-        { name: 'Story', w: 9, h: 16, cat: 'Insta' },
-        { name: 'Reels', w: 9, h: 16, cat: 'Insta' },
+        { name: 'Insta Story', w: 9, h: 16, cat: 'Insta' },
         { name: 'Reels Cover', w: 9, h: 16, cat: 'Insta' },
         // Facebook
         { name: 'FB Profile', w: 1, h: 1, cat: 'FB' },
         { name: 'Cover Photo', w: 820, h: 312, cat: 'FB' },
-        { name: 'Post Image', w: 1, h: 1, cat: 'FB' },
+        { name: 'FB Post', w: 1, h: 1, cat: 'FB' },
         { name: 'FB Portrait', w: 4, h: 5, cat: 'FB' },
         { name: 'FB Story', w: 9, h: 16, cat: 'FB' },
         { name: 'Event Cover', w: 1200, h: 628, cat: 'FB' },
-        { name: 'Banner', w: 16, h: 9, cat: 'FB' },
         // YouTube
         { name: 'Thumbnail', w: 16, h: 9, cat: 'YT' },
         { name: 'Channel Cover', w: 2560, h: 1440, cat: 'YT' },
-        { name: 'Video', w: 16, h: 9, cat: 'YT' },
-        { name: 'Shorts', w: 9, h: 16, cat: 'YT' },
+        { name: 'YT Shorts', w: 9, h: 16, cat: 'YT' },
         { name: 'YT Banner', w: 16, h: 2.5, cat: 'YT' },
         { name: 'YT Profile', w: 1, h: 1, cat: 'YT' },
-        // Gaming (Twitch & Roblox)
-        { name: 'Twitch Profile', w: 1, h: 1, cat: 'Game' },
+        // TikTok & Snapchat & X
+        { name: 'TikTok Video', w: 9, h: 16, cat: 'Social' },
+        { name: 'Snap Story', w: 9, h: 16, cat: 'Social' },
+        { name: 'X Post', w: 16, h: 9, cat: 'Social' },
+        { name: 'X Cover', w: 3, h: 1, cat: 'Social' },
+        { name: 'LinkedIn Post', w: 1.91, h: 1, cat: 'Social' },
+        // Gaming
         { name: 'Twitch Banner', w: 16, h: 4.8, cat: 'Game' },
         { name: 'Twitch Video', w: 16, h: 9, cat: 'Game' },
-        { name: 'Roblox Thumb', w: 16, h: 9, cat: 'Game' },
         { name: 'Roblox Icon', w: 1, h: 1, cat: 'Game' },
-        { name: 'Roblox Avatar', w: 1, h: 1, cat: 'Game' },
-        // Market (Shopify, eBay, Yelp, Zillow)
+        { name: 'Roblox Thumb', w: 16, h: 9, cat: 'Game' },
+        { name: 'Discord Icon', w: 1, h: 1, cat: 'Game' },
+        // Market
         { name: 'Shopify Prod', w: 1, h: 1, cat: 'Market' },
-        { name: 'Shopify Banner', w: 16, h: 9, cat: 'Market' },
         { name: 'eBay Product', w: 1, h: 1, cat: 'Market' },
-        { name: 'Yelp Business', w: 4, h: 3, cat: 'Market' },
-        { name: 'Zillow Image', w: 4, h: 3, cat: 'Market' },
-        // Social (TikTok, X, Snap, LI)
-        { name: 'TikTok Video', w: 9, h: 16, cat: 'Social' },
-        { name: 'Snapchat Snap', w: 9, h: 16, cat: 'Social' },
-        { name: 'X Profile', w: 1, h: 1, cat: 'Social' },
-        { name: 'X Post', w: 16, h: 9, cat: 'Social' },
-        { name: 'LI Profile', w: 1, h: 1, cat: 'Social' },
-        { name: 'LI Cover', w: 1584, h: 396, cat: 'Social' },
-        // Other (Pinterest, Paper, Discord, Tumblr, Soundcloud, Unsplash, Imgur)
+        { name: 'Yelp Photo', w: 4, h: 3, cat: 'Market' },
+        { name: 'Zillow Home', w: 4, h: 3, cat: 'Market' },
+        // Other
         { name: 'Pin Image', w: 2, h: 3, cat: 'Other' },
-        { name: 'Discord Icon', w: 1, h: 1, cat: 'Other' },
-        { name: 'SoundCloud Art', w: 1, h: 1, cat: 'Other' },
         { name: 'A4 Paper', w: 1, h: 1.41, cat: 'Other' },
         { name: 'Tumblr Post', w: 4, h: 5, cat: 'Other' },
-        { name: 'Unsplash Cover', w: 3, h: 2, cat: 'Other' },
-        { name: 'Imgur Post', w: 1, h: 1, cat: 'Other' }
+        { name: 'SoundCloud Cover', w: 1, h: 1, cat: 'Other' }
     ];
 
     let originalImg = new Image(), currentMode = 'Original';
@@ -148,21 +185,26 @@
         const bar = document.getElementById('aspectBar');
         bar.innerHTML = '';
         const filtered = filter === 'All' ? aspects : aspects.filter(a => a.cat === filter || a.name === 'Original');
+        
         filtered.forEach(asp => {
             const item = document.createElement('div');
             item.className = `aspect-item ${asp.name === currentMode ? 'active' : ''}`;
             let bw = 20, bh = 20;
             if(asp.w !== 'auto') {
-                if(asp.w > asp.h) { bw = 35; bh = 35 * (asp.h/asp.w); }
-                else { bh = 35; bw = 35 * (asp.w/asp.h); }
+                if(asp.w > asp.h) { bw = 38; bh = 38 * (asp.h/asp.w); }
+                else { bh = 38; bw = 38 * (asp.w/asp.h); }
             }
             item.onclick = () => setSize(asp.w, asp.h, item, asp.name);
-            item.innerHTML = `<div class="shape-view"><div class="inner-box" style="width:${bw}px;height:${bh}px;${asp.w==='auto'?'border-style:dashed':''}"></div></div><span>${asp.name}</span>`;
+            item.innerHTML = `
+                <div class="shape-view"><div class="inner-box" style="width:${bw}px;height:${bh}px;${asp.w==='auto'?'border-style:dashed':''}"></div></div>
+                <span>${asp.name}</span>`;
             bar.appendChild(item);
         });
     }
 
     document.getElementById('fileInput').onchange = (e) => {
+        const file = e.target.files[0];
+        if(!file) return;
         const reader = new FileReader();
         reader.onload = (ev) => {
             originalImg.src = ev.target.result;
@@ -170,14 +212,22 @@
                 document.getElementById('imagePreview').src = originalImg.src;
                 document.getElementById('landing-page').style.display = 'none';
                 document.getElementById('editor-page').style.display = 'flex';
-                document.getElementById('newBtn').style.display = 'block';
+                document.getElementById('backBtn').style.display = 'block';
                 document.getElementById('exportBtn').style.display = 'block';
                 setSize('auto', 'auto', null, 'Original');
                 renderAspects('All');
             };
         };
-        reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(file);
     };
+
+    function goToLanding() {
+        document.getElementById('editor-page').style.display = 'none';
+        document.getElementById('landing-page').style.display = 'flex';
+        document.getElementById('backBtn').style.display = 'none';
+        document.getElementById('exportBtn').style.display = 'none';
+        document.getElementById('fileInput').value = '';
+    }
 
     function filterCat(cat, el) {
         document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
@@ -206,7 +256,7 @@
         else { dh = th; dw = th*ir; x = (tw-dw)/2; y = 0; }
         ctx.drawImage(originalImg, x, y, dw, dh);
         const link = document.createElement('a');
-        link.download = `Resizer_${currentMode}.jpg`;
+        link.download = `EasyUseHub_${currentMode}.jpg`;
         link.href = canvas.toDataURL('image/jpeg', 0.95);
         link.click();
     }
