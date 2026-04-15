@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EasyUseHub – Ultimate Image Resizer</title>
+    <title>EasyUseHub – Social Media Image Resizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #000; --text-dim: #999; --border: #efefef; --bg-gray: #f8f8f8; }
@@ -47,7 +47,7 @@
         .hero-section { text-align: center; margin: 10px 0 30px; }
         .hero-section h1 { font-size: 34px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 8px; line-height: 1.1; }
         
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 420px; margin-bottom: 25px; }
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 420px; margin-top: 25px; }
         .nav-card { background: var(--bg-gray); padding: 14px; border-radius: 14px; text-decoration: none; color: #000; font-weight: 800; font-size: 12px; text-align: center; border: 1px solid transparent; transition: 0.2s; }
         .nav-card:hover { border-color: #000; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
@@ -119,17 +119,6 @@
         <p style="color:#888; font-size:14px; font-weight:500;">Resize for Insta, TikTok, YouTube & 50+ Others</p>
     </div>
 
-    <div class="nav-grid">
-        <a href="https://easyusehub.com" class="nav-card">🏠 HOME SITE</a>
-        <a href="https://easyusehub.com/pdf-tools" class="nav-card">📄 ALL PDF TOOLS</a>
-    </div>
-
-    <div class="custom-ad-bridge" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="window.open('https://easyusehub.blogspot.com/p/image-compressor.html', '_blank')">
-        <span class="ad-title">⚡ High-Speed Image Compressor</span>
-        <p>Compress your images without losing quality at EasyUseHub</p>
-        <div class="ad-btn" style="background: #fff;">Try Now</div>
-    </div>
-
     <div class="main-upload" onclick="document.getElementById('fileInput').click()">
         <div style="background:#f0f0f0; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:15px;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
@@ -138,10 +127,21 @@
         <span style="font-size:11px; color:#aaa; margin-top:5px;">JPG, PNG, WEBP</span>
     </div>
 
+    <div class="custom-ad-bridge" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="window.open('https://easyusehub.blogspot.com/p/image-compressor.html', '_blank')">
+        <span class="ad-title">⚡ High-Speed Image Compressor</span>
+        <p>Compress your images without losing quality at EasyUseHub</p>
+        <div class="ad-btn" style="background: #fff;">Try Now</div>
+    </div>
+
     <div class="custom-ad-bridge" style="background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="window.open('https://easyusehub.blogspot.com/p/ultimate-calculators-hub.html', '_blank')">
         <span class="ad-title">🔢 Smart Financial & Health Calculators</span>
         <p>Loan EMI, Age Calculator, and BMI Tracker at your fingertips.</p>
         <div class="ad-btn" style="background: #000; color: #fff;">Open Calculators</div>
+    </div>
+
+    <div class="nav-grid">
+        <a href="https://easyusehub.com" class="nav-card">🏠 HOME SITE</a>
+        <a href="https://easyusehub.com/pdf-tools" class="nav-card">📄 ALL PDF TOOLS</a>
     </div>
 </div>
 
@@ -245,7 +245,6 @@
                 setSize('auto', 'auto', null, 'Original');
                 renderAspects('All');
 
-                // ১ সেকেন্ড পরে পুশ অ্যাড দেখানো
                 setTimeout(() => {
                     document.getElementById('push-notification').classList.add('active');
                 }, 1000);
